@@ -658,7 +658,8 @@ echo "Building boost for android for $ARCH"
 
   prefix="./../$BUILD_DIR/out/$ARCH"
   if [ $PREFIX ]; then
-    prefix="$PREFIX/$ARCH"
+    prefix=$PREFIX/$ARCH
+    mkdir -p $prefix
   fi
 
   {
@@ -678,7 +679,7 @@ echo "Building boost for android for $ARCH"
         -sICONV_PATH=`pwd`/../libiconv-libicu-android/$ARCH \
         -sICU_PATH=`pwd`/../libiconv-libicu-android/$ARCH \
         --build-dir="./../$BUILD_DIR/build/$ARCH" \
-        --prefix="$prefix/$ARCH" \
+        --prefix=$prefix \
         $LIBRARIES                   \
         $LIBRARIES_BROKEN            \
         install 2>&1                 \
