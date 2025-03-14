@@ -656,6 +656,11 @@ echo "Building boost for android for $ARCH"
       unset WITHOUT_LIBRARIES
   fi
 
+  prefix="./../$BUILD_DIR/out/$ARCH"
+  if [ $PREFIX ]; then
+    prefix="$PREFIX/$ARCH"
+  fi
+
   {
     ./b2 -q                          \
         -d+2                         \
@@ -673,7 +678,7 @@ echo "Building boost for android for $ARCH"
         -sICONV_PATH=`pwd`/../libiconv-libicu-android/$ARCH \
         -sICU_PATH=`pwd`/../libiconv-libicu-android/$ARCH \
         --build-dir="./../$BUILD_DIR/build/$ARCH" \
-        --prefix="./../$BUILD_DIR/out/$ARCH" \
+        --prefix="$prefix/$ARCH" \
         $LIBRARIES                   \
         $LIBRARIES_BROKEN            \
         install 2>&1                 \
@@ -684,12 +689,5 @@ echo "Building boost for android for $ARCH"
 )
 
 dump "Done!"
-
-if [ $PREFIX ]; then
-    echo "Prefix set, copying files to $PREFIX"
-    mkdir -p $PREFIX/$ARCH
-    cp -r $PROGDIR/$BUILD_DIR/out/$ARCH/lib $PREFIX/$ARCH/
-    cp -r $PROGDIR/$BUILD_DIR/out/$ARCH/include $PREFIX/$ARCH/
-fi
 
 done # for ARCH in $ARCHLIST
