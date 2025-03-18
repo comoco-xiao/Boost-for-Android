@@ -663,6 +663,8 @@ echo "Building boost for android for $ARCH"
   fi
 
   {
+    ./b2 clean
+    
     ./b2 -q                          \
         -d+2                         \
         --ignore-site-config         \
