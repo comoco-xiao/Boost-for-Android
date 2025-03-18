@@ -666,7 +666,7 @@ echo "Building boost for android for $ARCH"
     ./b2 -q                          \
         -d+2                         \
         --ignore-site-config         \
-        --with-unit_test_framework   \
+        --with-test                  \
         -j$NCPU                      \
         target-os=${TARGET_OS}       \
         toolset=${TOOLSET_ARCH}      \
